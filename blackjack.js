@@ -120,9 +120,15 @@ const startGame = function() {
   player.drawCard();
   dealer.drawCard();
   player.drawCard();
-  if(immediateWin(player.hand)){return 'Player got blackjack!'};
+  if(immediateWin(player.hand)){
+    visualizeHands(player, dealer);
+    return 'Player got blackjack!'
+  };
   dealer.drawCard();
-  if(immediateWin(dealer.hand)){return 'Dealer got blackjack!'};
+  if(immediateWin(dealer.hand)){
+    visualizeHands(player, dealer);
+    return 'Dealer got blackjack!'
+  };
   visualizeHands(player, dealer);
   let playerScore = calcPoints(player.hand).total;
   showHand(player);
@@ -143,6 +149,7 @@ const startGame = function() {
     dealer.drawCard();
     dealerScore = calcPoints(dealer.hand).total;
     showHand(dealer);
+    visualizeHands(player, dealer);
   }
   if (dealerScore > 21) {
     return 'Dealer went over 21 - you win!';
